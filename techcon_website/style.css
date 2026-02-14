@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 /* ---------------------------
    BASE STYLES
 ----------------------------*/
@@ -15,6 +19,7 @@ body {
   line-height: 1.6;
   background-color: oklab(87.139% -0.00226 -0.00793);
   color: #333;
+  overflow-x: hidden;
 }
 
 
@@ -24,23 +29,37 @@ body {
 header {
   background: #0d1b2a;
   color: white;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
 nav {
   margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 nav a {
   color: white;
   text-decoration: none;
-  margin: 0 15px;
   font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  font-size: 0.95rem;
 }
 
 nav a:hover {
   color: #00b4d8;
+  background-color: rgba(0, 180, 216, 0.1);
 }
 
 /* ---------------------------
@@ -49,14 +68,15 @@ nav a:hover {
 main {
   max-width: 1100px;
   margin: auto;
-  padding: 20px;
+  padding: 15px;
+  width: 100%;
 }
 
 /* Sections & Articles */
 section, article {
   background: white;
-  margin: 20px 0;
-  padding: 20px;
+  margin: 15px 0;
+  padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 12px hsla(0, 71%, 36%, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -73,12 +93,28 @@ h1, h2, h3 {
   color: #0d1b2a;
   font-weight: 600;
   text-align: center;
+  word-wrap: break-word;
 }
+
+h1 {
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
 /* Paragraphs */
 p {
   margin-bottom: 15px;
   line-height: 1.7;
   color: #444;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ---------------------------
@@ -93,6 +129,8 @@ article:nth-of-type(2) img {
   border-radius: 10px;
   vertical-align: top;
   transition: transform 0.3s ease;
+  max-width: 100%;
+  height: auto;
 }
 
 article:nth-of-type(1) img:last-child,
@@ -193,28 +231,52 @@ th {
 form {
   max-width: 500px;
   margin: auto;
+  width: 100%;
 }
 
 input, textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-top: 5px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #00b4d8;
+  box-shadow: 0 0 5px rgba(0, 180, 216, 0.2);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
 button {
   background: #0d1b2a;
   color: white;
-  padding: 12px;
+  padding: 12px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  min-height: 44px;
 }
 
 button:hover {
   background: #00b4d8;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 /* ---------------------------
@@ -224,59 +286,231 @@ footer {
   background: #0d1b2a;
   color: white;
   text-align: center;
-  padding: 15px;
+  padding: 20px 15px;
   margin-top: 40px;
   border-top: 2px solid #00b4d8;
+  font-size: 0.95rem;
+}
+
+footer p {
+  margin-bottom: 10px;
+}
+
+footer a {
+  color: #00b4d8;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* ---------------------------
    RESPONSIVE DESIGN
 ----------------------------*/
-@media (max-width: 1024px) {
-  /* History & Mission images stack on tablet */
+
+/* Mobile First - Small screens (< 480px) */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  header {
+    padding: 12px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  nav a {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  section, article {
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  /* Stack images vertically on very small screens */
   article:nth-of-type(1) img,
   article:nth-of-type(2) img {
+    display: block;
     width: 100%;
     margin-right: 0;
+    margin-bottom: 10px;
   }
 
-  /* Speakers: 2 per row on tablet */
-  #past-speakers {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  /* Speakers: 1 per row on mobile */
+  /* Speakers: 1 per row */
   #past-speakers {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
 
-  article {
-    padding: 15px;
+  #past-speakers img {
+    width: 100px;
+    height: 100px;
   }
 
+  /* Table mobile layout */
   table, thead, tbody, th, td, tr {
     display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
   }
 
   th {
     display: none;
   }
 
+  tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
   td {
+    display: block;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #eee;
     position: relative;
-    padding-left: 50%;
+    padding-left: 40%;
+  }
+
+  td:last-child {
+    border-bottom: none;
   }
 
   td::before {
+    content: attr(data-label);
     position: absolute;
     left: 10px;
-    top: 12px;
+    top: 10px;
     font-weight: bold;
+    color: #0d1b2a;
   }
 
-  td:nth-of-type(1)::before { content: "Time"; }
-  td:nth-of-type(2)::before { content: "Session"; }
-  td:nth-of-type(3)::before { content: "Speaker"; }
+  video {
+    max-width: 100%;
+    margin: 15px 0;
+  }
+
+  button {
+    min-height: 48px;
+    font-size: 16px;
+  }
+}
+
+/* Tablet - Medium screens (480px - 1024px) */
+@media (min-width: 481px) and (max-width: 1024px) {
+  header {
+    padding: 20px 15px;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  nav {
+    gap: 15px;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  section, article {
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  /* History & Mission images: 1 per row on smaller tablets, 2 on larger */
+  article:nth-of-type(1) img,
+  article:nth-of-type(2) img {
+    width: 100%;
+    margin-right: 0;
+    display: block;
+  }
+
+  /* Speakers: 2 per row on tablet */
+  #past-speakers {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  #past-speakers img {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Table layout for tablets */
+  table {
+    font-size: 0.95rem;
+  }
+
+  th, td {
+    padding: 12px;
+  }
+}
+
+/* Desktop - Large screens (> 1024px) */
+@media (min-width: 1025px) {
+  nav {
+    gap: 20px;
+  }
+
+  nav a {
+    margin: 0 10px;
+  }
+
+  #past-speakers {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
